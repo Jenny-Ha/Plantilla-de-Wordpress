@@ -1,70 +1,39 @@
 <?php get_header(); ?>  
 			<section id="main-content">
-				
+				<?php if( have_posts() ) : while (have_posts() ) : the_post(); ?>
+
 				<article class="post resume">
 					<header class="post-title">
-						<h2><a href="">El título de un post</a></h2>
-						<small class="meta">Marzo 22, 2014 &bull; <a href="">Categoría</a></small>
+						<h2><a href="<?php the_permalink(); ?>"> <?php the_title(); ?> </a></h2>
+						<small class="meta"> <?php the_time( get_option('date_format')); ?> &bull; <a href=""> <?php the_category(', ') ?></a></small>
 					</header>
 					<div class="post-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						<a href="" class="readmore">Seguir leyendo &rarr;</a>
+						<?php the_excerpt(); ?>
+						<a href="<?php the_permalink(); ?>" class="readmore"> <?php _e('Seguir leyendo &rarr;', 'jha'); ?> </a>
 					</div>
 				</article>	<!-- article -->
 				
+				<?php endwhile; else : ?> 
 				
 				<article class="post resume">
 					<header class="post-title">
-						<h2><a href="">El título de un post</a></h2>
-						<small class="meta">Marzo 22, 2014 &bull; <a href="">Categoría</a></small>
+						<h2> <?php _e('No hay cotenidos disponibles','jha'); ?> </h2>
 					</header>
 					<div class="post-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						<a href="" class="readmore">Seguir leyendo &rarr;</a>
+						<p>
+							<?php _e('No hay contenidos que correspondan con esta página, por favor realiza una búsqueda para encontrar lo que deseas ver','jha'); ?>
+						</p>
+							<?php get_search_form( ); ?>
 					</div>
 				</article>	<!-- article -->
+				<?php endif; ?>
 				
-				
-				<article class="post resume">
-					<header class="post-title">
-						<h2><a href="">El título de un post</a></h2>
-						<small class="meta">Marzo 22, 2014 &bull; <a href="">Categoría</a></small>
-					</header>
-					<div class="post-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						<a href="" class="readmore">Seguir leyendo &rarr;</a>
-					</div>
-				</article>	<!-- article -->
-				
-				
-				<article class="post resume">
-					<header class="post-title">
-						<h2><a href="">El título de un post</a></h2>
-						<small class="meta">Marzo 22, 2014 &bull; <a href="">Categoría</a></small>
-					</header>
-					<div class="post-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						<a href="" class="readmore">Seguir leyendo &rarr;</a>
-					</div>
-				</article>	<!-- article -->
-				
-				
-				<article class="post resume">
-					<header class="post-title">
-						<h2><a href="">El título de un post</a></h2>
-						<small class="meta">Marzo 22, 2014 &bull; <a href="">Categoría</a></small>
-					</header>
-					<div class="post-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						<a href="" class="readmore">Seguir leyendo &rarr;</a>
-					</div>
-				</article>	<!-- article -->
-				
+				<?php if( get_next_posts_link() || get_previous_posts_link() ) { ?>
 				<div class="posts-nav cf">
-					<a href="" >&larr; Previos</a>
-					<a href="" >Recientes &rarr;</a>
+					<?php next_posts_link(__('&larr; Previos', 'jha') ); ?>
+					<?php previous_posts_link(__('Recientes &rarr;', 'jha') ); ?>
 				</div>
-				
+				<?php } ?>
 				
 			</section><!-- /#main-content -->
 			
